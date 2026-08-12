@@ -1,9 +1,12 @@
 use clap::Parser;
 use std::io::Cursor;
+use std::thread::sleep;
+use std::time::Duration;
 use image::{ImageReader, DynamicImage, ImageResult};
 use image::imageops::FilterType;
 use std::io::BufWriter;
 use std::fs::File;
+use std::time::Instant;
 
 
 #[derive(Parser)]
@@ -17,15 +20,15 @@ struct Cli {
 }
 
 
-
-
-fn main() -> ImageResult<()> {
+fn main() -> ImageResult<DynamicImage> {
     let quantity = 80;
     let resize_size = (500, 500);
     let output_path = "./output.jpeg";
-    let image_dynamic = ImageReader::open("./lebai_logo.png")?.decode()?;
-    let resize_image = image_dynamic.resize(resize_size.0, resize_size.1, FilterType::Lanczos3);
+    // let image_dynamic = ImageReader::open("./lebai_logo.png")?.decode()?;
+
+    let image_data = ImageReader::open("./lebai_logo.png")?;
 
 
-    Ok(())
+
+    
 }
