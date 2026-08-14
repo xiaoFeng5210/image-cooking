@@ -1,13 +1,8 @@
+use image::ImageReader;
 use image::codecs::jpeg::JpegEncoder;
-use image::imageops::FilterType;
-use image::{DynamicImage, ImageReader, ImageResult};
 use std::error::Error;
 use std::fs::File;
 use std::io::BufWriter;
-use std::io::Cursor;
-use std::thread::sleep;
-use std::time::Duration;
-use std::time::Instant;
 
 pub struct CompressImage {
     pub input_path: String,
@@ -33,3 +28,13 @@ impl CompressImage {
         Ok(())
     }
 }
+
+// #[cfg(test)]
+// mod tests {
+//     use super::*;
+
+//     #[test]
+//     fn test_add() {
+//         assert_eq!(add(1, 2), 3);
+//     }
+// }
