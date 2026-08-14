@@ -1,5 +1,4 @@
 use clap::Parser;
-use std::error::Error;
 
 mod compress;
 use compress::CompressImage;
@@ -19,14 +18,16 @@ struct Cli {
     quality: u8,
 }
 
-fn main() -> Result<(), Box<dyn Error>> {
+fn main() {
     let cli = Cli::parse();
     let compressor = CompressImage {
         input_path: cli.input,
         output_path: cli.output,
         quality: cli.quality,
     };
-    compressor.compress_image()?;
 
-    Ok(())
+    match compressor.compress_image() {
+        Ok(_) => println!("Image compressed successfully"),
+        Err(e) => println!("Error compressing image: {}", e),
+    }
 }
