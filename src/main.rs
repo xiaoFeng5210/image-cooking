@@ -6,7 +6,7 @@ use compress::CompressImage;
 
 #[derive(Parser)]
 #[command(name = "image-cooking")]
-#[command(author = "youerning.top")]
+#[command(author = "")]
 #[command(version = "1.0")]
 #[command(about = "a tool to compress image", long_about = None)]
 struct Cli {
@@ -27,5 +27,6 @@ fn main() -> Result<(), Box<dyn Error>> {
         quality: cli.quality,
     };
     compressor.compress_image()?;
+
     Ok(())
 }
