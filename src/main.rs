@@ -26,8 +26,6 @@ fn main() -> Result<(), Box<dyn Error>> {
         output_path: cli.output,
         quality: cli.quality,
     };
-
-    println!("input {}", &compressor.input_path);
     compressor.compress_image()?;
     Ok(())
 }
