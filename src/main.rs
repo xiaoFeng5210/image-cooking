@@ -1,34 +1,33 @@
 use clap::Parser;
-use std::io::Cursor;
-use std::thread::sleep;
-use std::time::Duration;
-use image::{ImageReader, DynamicImage, ImageResult};
-use image::imageops::FilterType;
-use std::io::BufWriter;
-use std::fs::File;
-use std::time::Instant;
+use std::error::Error;
 
+mod compress;
+use compress::CompressImage;
 
 #[derive(Parser)]
-#[command(name = "youerning")]
+#[command(name = "image-cooking")]
 #[command(author = "youerning.top")]
 #[command(version = "1.0")]
-#[command(about = "a tutorial of crate clap", long_about = None)]
+#[command(about = "a tool to compress image", long_about = None)]
 struct Cli {
-    input_path: String,
-    output_path: String,
+    input: String,
+
+    #[arg(short, long)]
+    output: String,
+
+    #[arg(short, long, default_value = "80")]
+    quality: u8,
 }
 
+fn main() -> Result<(), Box<dyn Error>> {
+    let cli = Cli::parse();
+    let compressor = CompressImage {
+        input_path: cli.input,
+        output_path: cli.output,
+        quality: cli.quality,
+    };
 
-fn main() -> ImageResult<DynamicImage> {
-    let quantity = 80;
-    let resize_size = (500, 500);
-    let output_path = "./output.jpeg";
-    // let image_dynamic = ImageReader::open("./lebai_logo.png")?.decode()?;
-
-    let image_data = ImageReader::open("./lebai_logo.png")?;
-
-
-
-    
+    println!("input {}", &compressor.input_path);
+    compressor.compress_image()?;
+    Ok(())
 }
