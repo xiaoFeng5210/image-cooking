@@ -1,3 +1,4 @@
+use image::DynamicImage;
 use image::ImageReader;
 use image::codecs::jpeg::JpegEncoder;
 use std::error::Error;
@@ -26,6 +27,17 @@ impl CompressImage {
         image_dynamic.write_with_encoder(encoder)?;
 
         Ok(())
+    }
+
+    fn resize_image(&self, max_length: u32) -> Result<(), Box<dyn Error>> {
+        let img_dynamic = self.create_dynamic_image()?;
+
+        Ok(())
+    }
+
+    fn create_dynamic_image(&self) -> Result<DynamicImage, Box<dyn Error>> {
+        let image_dynamic = ImageReader::open(&self.input_path)?.decode()?;
+        Ok(image_dynamic)
     }
 }
 
