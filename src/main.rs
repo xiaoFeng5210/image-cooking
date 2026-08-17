@@ -16,6 +16,9 @@ struct Cli {
 
     #[arg(short, long, default_value = "80")]
     quality: u8,
+
+    #[arg(short, long)]
+    max_size: Option<u32>,
 }
 
 fn main() {
@@ -24,6 +27,7 @@ fn main() {
         input_path: cli.input,
         output_path: cli.output,
         quality: cli.quality,
+        max_size: cli.max_size,
     };
 
     match compressor.compress_image() {
