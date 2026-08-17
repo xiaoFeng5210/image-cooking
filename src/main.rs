@@ -31,7 +31,7 @@ fn main() {
     };
 
     match compressor.compress_image() {
-        Ok(_) => println!("Image compressed successfully"),
-        Err(e) => println!("Error compressing image: {}", e),
+        Ok(_) => println!("✅ Image compressed successfully"),
+        Err(e) => println!("❌ Error compressing image: {}", e),
     }
 }
