@@ -38,25 +38,8 @@ impl CompressImage {
 
     fn resize_image(&self, max_size: u32) -> Result<DynamicImage, Box<dyn Error>> {
         let img_dynamic = self.create_dynamic_image()?;
-
-        let max_size_resize: u32;
-
-        // 获取图片长宽
         let (w, h) = img_dynamic.dimensions();
-
-        if w > h {
-            if w > max_size {
-                max_size_resize = max_size;
-            } else {
-                max_size_resize = w;
-            }
-        } else {
-            if h > max_size {
-                max_size_resize = max_size;
-            } else {
-                max_size_resize = h;
-            }
-        }
+        let max_size_resize = calculate_max_size(w, h, max_size);
 
         let resized_image =
             img_dynamic.resize(max_size_resize, max_size_resize, FilterType::Lanczos3);
@@ -70,12 +53,48 @@ impl CompressImage {
     }
 }
 
-// #[cfg(test)]
-// mod tests {
-//     use super::*;
+// 计算最大尺寸
+fn calculate_max_size(w: u32, h: u32, max_size: u32) -> u32 {
+    let max_size_resize: u32;
 
-//     #[test]
-//     fn test_add() {
-//         assert_eq!(add(1, 2), 3);
-//     }
-// }
+    if w > h {
+        if w > max_size {
+            max_size_resize = max_size;
+        } else {
+            max_size_resize = w;
+        }
+    } else {
+        if h > max_size {
+            max_size_resize = max_size;
+        } else {
+            max_size_resize = h;
+        }
+    }
+
+    max_size_resize
+}
+
+#[cfg(test)]
+mod compress_image_tests {
+    use super::*;
+
+    #[test]
+    fn test_calculate_1() {
+        let w = 1000;
+        let h = 500;
+        let max_size = 500;
+
+        let result = calculate_max_size(w, h, max_size);
+        assert_eq!(result, 500)
+    }
+
+    #[test]
+    fn test_calculate_2() {
+        let w = 500;
+        let h = 1000;
+        let max_size = 500;
+
+        let result = calculate_max_size(w, h, max_size);
+        assert_eq!(result, 500)
+    }
+}
