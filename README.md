@@ -110,3 +110,15 @@ image-cooking --help
 image-cooking -V
 ```
 
+
+## 发布
+
+发布前先检查：
+```bash
+cargo publish --dry-run
+```
+
+发布：
+```bash
+cargo publish
+```
