@@ -38,33 +38,28 @@ impl CompressImage {
 
     fn resize_image(&self, max_size: u32) -> Result<DynamicImage, Box<dyn Error>> {
         let img_dynamic = self.create_dynamic_image()?;
-        let mut actual_w = 0;
-        let mut actual_h = 0;
+
+        let max_size_resize: u32;
 
         // 获取图片长宽
         let (w, h) = img_dynamic.dimensions();
-        // 宽高比
-        let aspect_ratio = w / h;
 
         if w > h {
             if w > max_size {
-                actual_w = max_size;
-                actual_h = actual_w / aspect_ratio;
+                max_size_resize = max_size;
             } else {
-                actual_w = w;
-                actual_h = actual_w / aspect_ratio;
+                max_size_resize = w;
             }
         } else {
             if h > max_size {
-                actual_h = max_size;
-                actual_w = actual_h * aspect_ratio;
+                max_size_resize = max_size;
             } else {
-                actual_h = h;
-                actual_w = actual_h * aspect_ratio;
+                max_size_resize = h;
             }
         }
 
-        let resized_image = img_dynamic.resize(actual_w, actual_h, FilterType::Lanczos3);
+        let resized_image =
+            img_dynamic.resize(max_size_resize, max_size_resize, FilterType::Lanczos3);
 
         Ok(resized_image)
     }

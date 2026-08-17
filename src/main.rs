@@ -17,7 +17,7 @@ struct Cli {
     #[arg(short, long, default_value = "80")]
     quality: u8,
 
-    #[arg(short, long)]
+    #[arg(short, long = "size")]
     max_size: Option<u32>,
 }
 
