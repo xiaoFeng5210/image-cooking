@@ -1,4 +1,5 @@
 use clap::Parser;
+use std::fs;
 
 mod compress;
 mod utils;
@@ -33,7 +34,18 @@ fn main() {
     };
 
     match compressor.compress_image() {
-        Ok(_) => println!("✅ Image compressed successfully"),
+        Ok(_) => {
+            // println!("✅ Image compressed successfully");
+            let input_size = fs::metadata(&compressor.input_path).unwrap().len();
+            let output_size = fs::metadata(&compressor.output_path).unwrap().len();
+            if output_size >= input_size {
+                // 输出图片比输入图片大，可以采用--size的方式压缩
+                println!("⚠️ 压缩后图片比原图大, 原图可能压缩过，可以采用--size的方式压缩");
+                println!("压缩后图片大小: {}KB", output_size / 1000);
+            } else {
+                println!("✅ 压缩成功，压缩后图片大小: {}KB", output_size / 1000);
+            }
+        }
         Err(e) => println!("❌ Error compressing image: {}", e),
-    }
+    };
 }
