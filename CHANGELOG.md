@@ -2,11 +2,15 @@
 
 本项目版本记录遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [Semantic Versioning](https://semver.org/lang/zh-CN/)。
 
-## [Unreleased]
+## [0.0.6] - 2026-08-18
 
 ### Added
 
-- 根目录增加 `AGENTS.md`：做完需求或下班前要更新 changelog，并检查 README。
+- 根目录增加 `AGENTS.md`：做完需求或下班前按 `Cargo.toml` 版本号更新 changelog，并检查 README。
+
+### Changed
+
+- README 改为 `-o` 可选，不传时默认输出 `output.jpeg`。
 
 ## [0.0.5] - 2026-08-18
 
