@@ -455,7 +455,7 @@ dependencies = [
 
 [[package]]
 name = "image-cooking"
-version = "0.0.2"
+version = "0.0.5"
 dependencies = [
  "clap",
  "image",
