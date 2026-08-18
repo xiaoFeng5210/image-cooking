@@ -1,7 +1,9 @@
 use clap::Parser;
 
 mod compress;
+mod utils;
 use compress::CompressImage;
+use utils::create_output;
 
 #[derive(Parser)]
 #[command(name = "image-cooking")]
@@ -12,7 +14,7 @@ struct Cli {
     input: String,
 
     #[arg(short, long)]
-    output: String,
+    output: Option<String>,
 
     #[arg(short, long, default_value = "80")]
     quality: u8,
@@ -25,7 +27,7 @@ fn main() {
     let cli = Cli::parse();
     let compressor = CompressImage {
         input_path: cli.input,
-        output_path: cli.output,
+        output_path: create_output(cli.output),
         quality: cli.quality,
         max_size: cli.max_size,
     };
