@@ -35,7 +35,6 @@ fn main() {
 
     match compressor.compress_image() {
         Ok(_) => {
-            // println!("✅ Image compressed successfully");
             let input_size = fs::metadata(&compressor.input_path).unwrap().len();
             let output_size = fs::metadata(&compressor.output_path).unwrap().len();
             if output_size >= input_size {
