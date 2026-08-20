@@ -4,7 +4,7 @@ use std::fs;
 mod compress;
 mod utils;
 use compress::CompressImage;
-use utils::create_output;
+use utils::{calculate_size, create_output};
 
 #[derive(Parser)]
 #[command(name = "image-cooking")]
@@ -40,9 +40,12 @@ fn run() {
             if output_size >= input_size {
                 // 输出图片比输入图片大，可以采用--size的方式压缩
                 println!("⚠️ 压缩后图片比原图大, 原图可能压缩过，可以采用--size的方式压缩");
-                println!("压缩后图片大小: {}KB", output_size / 1000);
+                println!("压缩后图片大小: {}", calculate_size(output_size));
             } else {
-                println!("✅ 压缩成功，压缩后图片大小: {}KB", output_size / 1000);
+                println!(
+                    "✅ 压缩成功，压缩后图片大小: {}",
+                    calculate_size(output_size)
+                );
             }
         }
         Err(e) => println!("❌ Error compressing image: {}", e),
