@@ -20,3 +20,31 @@ pub fn calculate_size(size: u64) -> String {
         _ => format!("{size}B"),
     }
 }
+
+#[cfg(test)]
+mod calculate_size_tests {
+    use super::*;
+
+    #[test]
+    fn test_bytes() {
+        assert_eq!(calculate_size(0), "0B");
+        assert_eq!(calculate_size(1023), "1023B");
+    }
+
+    #[test]
+    fn test_kb() {
+        assert_eq!(calculate_size(1024), "1.00KB");
+        assert_eq!(calculate_size(1536), "1.50KB");
+    }
+
+    #[test]
+    fn test_mb() {
+        assert_eq!(calculate_size(1024 * 1024), "1.00MB");
+        assert_eq!(calculate_size(1024 * 1024 + 1024 * 512), "1.50MB");
+    }
+
+    #[test]
+    fn test_gb() {
+        assert_eq!(calculate_size(1024 * 1024 * 1024), "1.00GB");
+    }
+}

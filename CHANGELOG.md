@@ -2,6 +2,17 @@
 
 本项目版本记录遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循 [Semantic Versioning](https://semver.org/lang/zh-CN/)。
 
+## [0.0.8] - 2026-08-20
+
+### Added
+
+- `utils::calculate_size` 按 `B` / `KB` / `MB` / `GB` 格式化文件体积，并补充单元测试。
+
+### Changed
+
+- 压缩完成后的体积改为按 1024 进制自动换算，不再固定打印 `KB`。
+- crates.io 关键词增加 `fast compress`。
+
 ## [0.0.6] - 2026-08-18
 
 ### Added
