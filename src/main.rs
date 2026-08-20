@@ -24,7 +24,7 @@ struct Cli {
     max_size: Option<u32>,
 }
 
-fn main() {
+fn run() {
     let cli = Cli::parse();
     let compressor = CompressImage {
         input_path: cli.input,
@@ -47,4 +47,8 @@ fn main() {
         }
         Err(e) => println!("❌ Error compressing image: {}", e),
     };
+}
+
+fn main() {
+    run();
 }
