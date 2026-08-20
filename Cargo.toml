@@ -6,7 +6,7 @@ description = "A CLI tool to compress images"
 license = "MIT"
 repository = "https://github.com/xiaoFeng5210/image-cooking"
 readme = "README.md"
-keywords = ["image", "compress", "cli", "fast compress"]
+keywords = ["image", "compress", "cli", "fast"]
 categories = ["command-line-utilities"]
 
 
